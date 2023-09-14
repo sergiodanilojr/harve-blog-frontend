@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+
+  <title>Vite App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <!-- begin:navbar  -->
+  <div class="w-full bg-white py-4">
+    <div class="container">
+      <div class="font-extrabold text-2xl text-blue-500 flex gap-2 items-center"><span
+          class="fa-solid fa-terminal p-2.5 rounded border border-blue-400"></span> SimboraDev</div>
+      <nav class="flex gap-6">
+        <ul class="hidden lg:flex items-center gap-4 text-sm font-medium">
+          <li>
+            <a href="#" class="font-primary">Início</a>
+          </li>
+          <li>
+            <a href="#" class="font-primary">Publicações</a>
+          </li>
+          <li>
+            <a href="#" class="font-primary">Tags</a>
+          </li>
+        </ul>
+        <ul class="flex items-center gap-4">
+          <li class="inline-flex lg:hidden">
+            <span class="fa fa-bars"></span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- end:navbar  -->
+
+  <!-- begin:content -->
+  <main class="mt-10">
+    <article>
+
+
+      <!-- begin:header-wrapper -->
+      <div class="w-full bg-gray-500 py-10">
+        <div class="container">
+          <header class="py-8  ">
+            <h1 class="text-xl lg:text-4xl  font-medium text-gray-50 pb-4">PHP Data Object: Implementando dados de forma
+              centralizada com PHP</h1>
+              <div class="flex gap-2">
+                <span class="tag">PHP</span>
+                <span class="tag">Programação</span>
+                <span class="tag">Banco de dados</span>
+              </div>
+          </header>
+        </div>
+      </div>
+      <!-- end:header-wrapper -->
+      <div class="content w-[90%] lg:w-[60%] mx-auto py-8 font-light lg:text-sm text-gray-700">
+        <p class="">Na primeira parte dessa série de publicações vimos como montar uma classe de conexão com o banco de
+          dados bem versátil, à qual você consegue manipular todas as opções através de uma folha de configuração
+          inicializada pelo Gerenciador de Dependências do PHP, o Composer, que disponibiliza globalmente o que ali foi
+          definido.</p>
+
+        <p class="">
+          Nesta publicação aprenderemos como componentizar a rotina de CRUD, que é o acrônimo de create, read, update e
+          delete, para persistir, ler e filtrar, além de destruir dados do banco de maneira versátil.
+        </p>
+
+        <p class="">
+          Construindo a Classe CRUD, para trazer dinamismo para aplicação.
+          Cada método desta classe, como mostra o exemplo abaixo, faz o chamamento da classe que construímos a priori,
+          na
+          publicação anterior, e realiza, caso haja conexão com o banco de dados, aquilo que se propõe.
+        </p>
+
+        <p class="font-bold">
+          A classe será composta pelas seguintes propriedades:
+        </p>
+        <p class="">
+          private $fail — Responsável por armazenar as exceções (\PDOException) do PDO;
+        </p>
+        <p class="">
+          private $query — Todas as ‘queries’ que são construídas em cada um dos métodos são armazenadas nesta
+          propriedade;
+        </p>
+        <p class="">
+          private $params — Uma boa prática quando trabalhamos com o PDO é trabalhar com bind params, esta propriedade
+          irá
+          armazenar cada um desses parâmetros como uma string, para que sejam manipulados da maneira mais segura.
+        </p>
+        <p class="">
+          private static $table — Note que esta propriedade foi definida como estática, pois possibilitará o
+          endereçamento
+          de qual tabela presente no banco de dados sofrerá, naquele instante, a ação à qual um determinado método se
+          destina.
+        </p>
+        <p class="font-bold">
+          Getters and Setters</p>
+        <p class="font-bold">
+          Métodos de Obtenção (Getters)</p>
+        <p class="">
+          public function getFail() — Retorna, quando existente, uma Exceção PDO;
+        </p>
+        <p class="">
+          public function getQuery() — Retorna a query que foi contruída naquele momento, para fim de consulta ou
+          reaproveitamento;</p>
+
+        <p class="font-bold">
+          Métodos de Configuração (setters)</p>
+        <p class="">
+          public static function setTable(string $table) — Quando chamado, esse método retorna uma nova instância da
+          classe
+          CRUD, permitindo reconfigurar todos os comportamentos que se deseja de acordo à tabela aqui configurada no seu
+          parâmetro.</p>
+
+        <p class="">
+          public function setQuery(string $query) — Este método permitirá uma abordagem bem dinâmica com o PDO,
+          portanto, há
+          a possibilidade de criar queries à maneira que se desejar escrever, portanto, este método existe para garantir
+          esse comportamento.</p>
+
+        <p class="">
+          public function setParams($params) — Todas as vezes que se faz necessário ter parâmetros numa determinada
+          consulta, escrita ou exclusão, este método é invocado. Seja internamente, nos métodos que serão explanados
+          abaixo,
+          ou por fora, para implementação qualquer utilizando esta classe.</p>
+      </div>
+    </article>
+  </main>
+  <!-- end:content -->
+
+  <!-- begin:footer -->
+  <footer class="bg-gray-50">
+    <div class="container py-20">
+      <div class="md:w-50% mx-auto text-center">
+        <div class="py-4">
+          <h2 class="text-slate-600">Inscreva-se na nossa newsletter</h2>
+          <p class="text-gray-500 font-light text-sm">Receba notificações assim que uma publicação for postada.</p>
+        </div>
+        <form action="">
+          <div class="flex py-2 px-2 bg-white border border-gray-400 rounded-lg">
+            <input type="text" class="flex-1 focus:outline-none font-light text-blue-500"
+              placeholder="Seu melhor e-mail">
+            <button
+              class="font-medium text-xs text-white bg-blue-700 hover:bg-blue-800 transition-colors duration-300 rounded-lg px-2 py-1">Inscrever</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="bg-gray-600">
+      <div class="container py-8">
+        <p class="text-gray-50 font-thin text-sm">SimboraDev - Todos os direitos registrados</p>
+        <p class="text-gray-50 font-thin text-sm">contato@simboradev.com.br</p>
+      </div>
+    </div>
+  </footer>
+  <!-- end:footer -->
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
